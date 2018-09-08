@@ -6,8 +6,13 @@ import logging
 from external import get_random_message
 from aiohttp import ClientSession
 import sys
+import os
 
 logger = logging.getLogger(__name__)
+
+
+def ping_enabled():
+    return os.getenv('THEMIS_FINALS_PING_ENABLED', 'yes') == 'yes'
 
 
 async def ping_service(endpoint):
@@ -25,7 +30,7 @@ async def push(endpoint, capsule, label, metadata):
     delay = randrange(1, 5)
     logger.debug('Sleeping for {0} seconds...'.format(delay))
     sleep(delay)
-    if not await ping_service(endpoint):
+    if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
     new_label = get_random_message(8)
     return Result.UP, new_label, get_random_message()
@@ -35,6 +40,6 @@ async def pull(endpoint, capsule, label, metadata):
     delay = randrange(1, 5)
     logger.debug('Sleeping for {0} seconds...'.format(delay))
     sleep(delay)
-    if not await ping_service(endpoint):
+    if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
     return Result.UP, get_random_message()
