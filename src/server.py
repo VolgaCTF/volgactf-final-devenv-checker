@@ -332,6 +332,10 @@ class CheckerServer:
         web.run_app(app, host=self.host, port=self.port)
 
 
-if __name__ == '__main__':
+def main():
     checker = CheckerServer(host='0.0.0.0', port=80)
     checker.run_app()
+
+
+if __name__ == '__main__':
+    main()
