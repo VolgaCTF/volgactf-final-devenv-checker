@@ -1,8 +1,6 @@
-FROM python:3.6-alpine
-COPY ./requirements.txt ./entrypoint.sh /other/
-RUN apk add --update build-base libffi-dev openssl-dev && pip install -r /other/requirements.txt
-ADD ./src /src
-WORKDIR /src
-ENTRYPOINT ["/other/entrypoint.sh"]
+FROM volgactf/volgactf-final-python-checker:1.0.0
+ADD src VERSION /dist/
+WORKDIR /dist
+RUN pip install -r requirements.txt
 CMD ["python", "-u", "server.py"]
 EXPOSE 80
