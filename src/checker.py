@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from time import sleep
 from random import randrange
-from themis.finals.checker.result import Result
+from volgactf.final.checker.result import Result
 import logging
 from external import get_random_message
 from aiohttp import ClientSession
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def ping_enabled():
-    return os.getenv('THEMIS_FINALS_PING_ENABLED', 'yes') == 'yes'
+    return os.getenv('VOLGACTF_FINAL_PING_ENABLED', 'yes') == 'yes'
 
 
 async def ping_service(endpoint):
