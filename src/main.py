@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from time import sleep
+from asyncio import sleep
 from random import randrange
 from volgactf.final.checker.result import Result
 import logging
@@ -29,7 +29,7 @@ async def ping_service(endpoint):
 async def push(endpoint, capsule, label, metadata):
     delay = randrange(1, 5)
     logger.debug('Sleeping for {0} seconds...'.format(delay))
-    sleep(delay)
+    await sleep(delay)
     if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
     new_label = get_random_message(8)
@@ -39,7 +39,7 @@ async def push(endpoint, capsule, label, metadata):
 async def pull(endpoint, capsule, label, metadata):
     delay = randrange(1, 5)
     logger.debug('Sleeping for {0} seconds...'.format(delay))
-    sleep(delay)
+    await sleep(delay)
     if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
     return Result.UP, get_random_message()

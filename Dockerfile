@@ -1,6 +1,6 @@
-FROM volgactf/volgactf-final-python-checker:2.0.0
-ADD src VERSION /dist/
+FROM volgactf/volgactf-final-python-checker:3.0.0
+ADD src VERSION /dist/checker/
 WORKDIR /dist
-RUN pip install -r requirements.txt
+RUN pip install -r checker/requirements.txt
 CMD ["python", "-u", "server.py"]
 EXPOSE 80
