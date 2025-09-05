@@ -32,8 +32,10 @@ async def push(endpoint, capsule, label, metadata):
     await sleep(delay)
     if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
-    new_label = get_random_message(8)
-    return Result.UP, new_label, get_random_message()
+    updated_label = 'LABEL__{0}'.format(get_random_message(8))
+    message = 'MESSAGE__{0}'.format(get_random_message(16))
+    open_data = 'OPEN_DATA__{0}'.format(get_random_message(12))
+    return Result.UP, updated_label, message, open_data
 
 
 async def pull(endpoint, capsule, label, metadata):
@@ -42,4 +44,5 @@ async def pull(endpoint, capsule, label, metadata):
     await sleep(delay)
     if ping_enabled() and not await ping_service(endpoint):
         return Result.DOWN
-    return Result.UP, get_random_message()
+    message = 'MESSAGE__{0}'.format(get_random_message(16))
+    return Result.UP, message

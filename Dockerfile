@@ -1,4 +1,5 @@
-FROM volgactf/volgactf-final-python-checker:4.0.0
+# FROM volgactf/volgactf-final-python-checker:5.0.0
+FROM volgactf/volgactf-final-python-checker:latest
 LABEL maintainer="VolgaCTF"
 
 ARG BUILD_DATE
